@@ -5,11 +5,11 @@ data class Event(
     override val name: String,
     override val description: String,
     override val contextText: GameState.() -> String,
-    internal val criteria: List<GameState.() -> Boolean>,
+    internal val criteria: List<Criteria>,
     val results: List<GameState.() -> GameState>,
     override val obtained: Boolean = true
 ) : Thing {
     fun triggers(gameState: GameState): Boolean =
-        criteria.map { gameState.it() }
+        criteria.map { it(gameState) }
             .reduce { acc, curr -> acc && curr }
 }

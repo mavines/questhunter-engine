@@ -13,13 +13,14 @@ interface Thing : Serializable {
 fun Thing.copy(
     id: String = this.id,
     name: String = this.name,
+    description: String = this.description,
     text: (GameState) -> String = this.contextText,
     obtained: Boolean = this.obtained
 ): Thing {
     return when (this) {
-        is Item -> this.copy(id = id, name = name, contextText = text, obtained = obtained)
-        is GameCharacter -> this.copy(id = id, name = name, contextText = text, obtained = obtained)
-        is Quest -> this.copy(id = id, name = name, contextText = text, obtained = obtained)
+        is Item -> this.copy(id = id, name = name, description = description, contextText = text, obtained = obtained)
+        is GameCharacter -> this.copy(id = id, name = name, description = description, contextText = text, obtained = obtained)
+        is Quest -> this.copy(id = id, name = name, description = description, contextText = text, obtained = obtained)
         else -> {
             throw Exception("Invalid Thing: $this")
         }
