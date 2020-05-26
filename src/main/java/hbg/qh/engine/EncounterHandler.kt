@@ -1,8 +1,8 @@
-package hbg.nfc.engine
+package hbg.qh.engine
 
-import hbg.nfc.model.GameState
-import hbg.nfc.model.Quest
-import hbg.nfc.model.Thing
+import hbg.qh.model.GameState
+import hbg.qh.model.Quest
+import hbg.qh.model.Thing
 
 fun updateState(startState: GameState, encounteredThing: Thing): GameState {
     val stateWithEncounter = startState.copy(currentThingId = encounteredThing.id)

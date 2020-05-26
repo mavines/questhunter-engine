@@ -1,4 +1,4 @@
-package hbg.nfc.model
+package hbg.qh.model
 
 import java.io.Serializable
 

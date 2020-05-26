@@ -1,4 +1,4 @@
-package hbg.nfc.model
+package hbg.qh.model
 
 // Results
 fun gain(key: String): GameState.() -> GameState = {this.updateThing(key) {this.things[key]!!.copy(obtained = true)} }

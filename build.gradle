@@ -26,15 +26,37 @@ android {
 
 }
 
+def libGroupId = 'hbg.qh'
+def libArtifactId = 'engine'
+def libVersion = '0.1.0'
+def libDesc = 'This is the library for creating custom adventures for Quest Hunter'
+def libLicenses = ['MIT']
+
+
 
 project.afterEvaluate {
+    task sourceJar(type: Jar) {
+        from android.sourceSets.main.java.srcDirs
+        archiveClassifier.set("sources")
+    }
+
     publishing {
         publications {
             engine(MavenPublication) {
-                groupId = "hbg.nfc"
-                artifactId = "engine"
-                version = "0.1.0"
+                groupId libGroupId
+                artifactId libArtifactId
+                version libVersion
 
+                pom.withXml {
+                    def dependenciesNode = asNode().appendNode('dependencies')
+                    // Add KotlinStdlib
+                    def kotlinStdlibDepNode = dependenciesNode.appendNode('dependency')
+                    kotlinStdlibDepNode.appendNode('groupId', kotlinStdlibGroupId)
+                    kotlinStdlibDepNode.appendNode('artifactId', kotlinStdlibArtifactId)
+                    kotlinStdlibDepNode.appendNode('version', kotlinStdlibVersion)
+                }
+
+                artifact(sourceJar)
                 artifact bundleReleaseAar
             }
         }

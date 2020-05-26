@@ -1,17 +1,15 @@
-package hbg.nfc.model
+package hbg.qh.model
 
-data class Quest(
+data class Event(
     override val id: String,
     override val name: String,
     override val description: String,
     override val contextText: GameState.() -> String,
     internal val criteria: List<GameState.() -> Boolean>,
     val results: List<GameState.() -> GameState>,
-    val steps: List<Quest> = emptyList(),
-    override val obtained: Boolean = false,
-    val completed: Boolean = false
+    override val obtained: Boolean = true
 ) : Thing {
-    fun canComplete(gameState: GameState): Boolean =
+    fun triggers(gameState: GameState): Boolean =
         criteria.map { gameState.it() }
             .reduce { acc, curr -> acc && curr }
 }

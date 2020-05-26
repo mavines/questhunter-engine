@@ -1,4 +1,4 @@
-package hbg.nfc.model
+package hbg.qh.model
 
 data class Extra<T>(
     override val id: String,
